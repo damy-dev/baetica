@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0.25turn, rgb(23, 92, 121) 30%, rgb(7, 96, 19), rgb(193, 39, 188));
+}
+
+header {
+    @apply flex flex-row w-1/2 mx-auto my-10 text-gray-200 text-4xl;
+}
+
+.lupa {
+    @apply w-[30px] h-[30px];
+}
+
+.search {
+    @apply border-b-2 border-gray-200 ml-20 flex flex-row h-10;
+}
+
+.search input, .search input:focus {
+    @apply outline-0 ml-5 text-2xl;
+}
+
+.masc_fem {
+    @apply flex flex-row flex-wrap w-1/2 mx-auto my-10 text-gray-200 text-4xl;
+}
+
+#masc_col {
+    @apply block w-1/2;
+}
+
+#fem_col {
+    @apply block w-1/2;
+}
+
+.header_m {
+    @apply bg-blue-700 m-5 text-2xl text-center text-gray-200 p-8;
+}
+
+.header_f {
+    @apply bg-pink-700 m-5 text-2xl text-center text-gray-200 p-8;
+}
+
+.card {
+    @apply relative text-2xl m-5 h-50 text-center text-gray-200 p-8;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.profile {
+    @apply absolute bottom-0;
+    z-index: 0;
+}
+
+.ranking {
+    @apply absolute bottom-10;
+}
+
+.nro_ranking {
+    @apply text-9xl;
+}
+
+.photo {
+    @apply object-cover h-50 min-h-50 max-h-50;
+    aspect-ratio: 1/1;
+    object-position: top;
+}
+
+.player_name_container {
+    @apply w-1/1 text-right;
+}
