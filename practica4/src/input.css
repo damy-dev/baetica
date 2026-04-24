@@ -1,71 +1,149 @@
 @import "tailwindcss";
 
 body {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(0.25turn, rgb(23, 92, 121) 30%, rgb(7, 96, 19), rgb(193, 39, 188));
+  height: 100vh;
+  background: linear-gradient(
+    0.25turn,
+    rgb(23, 92, 121) 30%,
+    rgb(7, 96, 19),
+    rgb(193, 39, 188)
+  );
 }
 
 header {
-    @apply flex flex-row w-1/2 mx-auto my-10 text-gray-200 text-4xl;
+  @apply flex flex-row w-[1024px] mx-auto my-10 text-gray-200 text-4xl p-5;
 }
 
 .lupa {
-    @apply w-[30px] h-[30px];
+  @apply w-[30px] h-[30px];
 }
 
 .search {
-    @apply border-b-2 border-gray-200 ml-20 flex flex-row h-10;
+  @apply border-b-2 border-gray-200 ml-20 flex flex-row h-10;
 }
 
-.search input, .search input:focus {
-    @apply outline-0 ml-5 text-2xl;
+.search input,
+.search input:focus {
+  @apply outline-0 ml-5 text-2xl;
+}
+
+#search_for {
+  @apply outline-0 text-xl ml-3;
 }
 
 .masc_fem {
-    @apply flex flex-row flex-wrap w-1/2 mx-auto my-10 text-gray-200 text-4xl;
+  @apply flex flex-row flex-wrap w-[1024px] mx-auto my-10 text-gray-200 text-4xl;
 }
 
 #masc_col {
-    @apply block w-1/2;
+  @apply w-1/2;
 }
 
 #fem_col {
-    @apply block w-1/2;
+  @apply w-1/2;
 }
 
 .header_m {
-    @apply bg-blue-700 m-5 text-2xl text-center text-gray-200 p-8;
+  @apply bg-blue-700 m-5 text-2xl text-center text-gray-200 p-8 rounded;
+  min-width: 470px;
 }
 
 .header_f {
-    @apply bg-pink-700 m-5 text-2xl text-center text-gray-200 p-8;
+  @apply bg-pink-700 m-5 text-2xl text-center text-gray-200 p-8 rounded;
+  min-width: 470px;
+}
+
+.loading {
+  @apply text-xl text-center text-white mt-5;
 }
 
 .card {
-    @apply relative text-2xl m-5 h-50 text-center text-gray-200 p-8;
-    background-color: rgba(255, 255, 255, 0.2);
+  @apply relative text-2xl m-5 h-50 text-center text-gray-200 p-8 rounded;
+  min-width: 470px;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .profile {
-    @apply absolute bottom-0;
-    z-index: 0;
+  @apply absolute bottom-0;
+  z-index: 10;
 }
 
 .ranking {
-    @apply absolute bottom-10;
+  @apply absolute -left-8;
 }
 
 .nro_ranking {
-    @apply text-9xl;
+  @apply text-7xl;
 }
 
 .photo {
-    @apply object-cover h-50 min-h-50 max-h-50;
-    aspect-ratio: 1/1;
-    object-position: top;
+  @apply object-cover h-50 min-h-50 max-h-50;
+  aspect-ratio: 1/1;
+  object-position: top;
 }
 
 .player_name_container {
-    @apply w-1/1 text-right;
+  @apply w-1/1 text-right;
+}
+
+.player_name {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.info_container {
+  @apply w-1/1 p-2 h-15 border-2 border-gray-400 relative;
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.move {
+  @apply -left-8 top-5 text-white absolute z-20 bg-green-600 px-5 rounded-full;
+}
+
+.nation_container {
+  @apply flex flex-row right-33 absolute top-3 border-r-2 border-white;
+}
+
+.img_nation {
+  @apply object-contain w-10;
+}
+
+.sig_nation {
+  @apply mx-3 mt-1;
+  font-size: medium;
+}
+
+.points_container {
+  @apply right-3 top-4 absolute;
+  font-size: medium;
+}
+
+.points {
+  @apply font-bold;
+}
+
+.change_page {
+  @apply w-15 flex mx-auto p-2 cursor-pointer;
+}
+
+.change_page:disabled {
+  @apply cursor-auto;
+}
+
+@media (max-width: 1024px) {
+  body {
+    min-width: 530px;
+  }
+  header {
+    @apply flex-wrap gap-5 w-[512px];
+  }
+  .masc_fem {
+    @apply block;
+    width: 512px;
+  }
+  .header_f,
+  .header_m,
+  .card {
+    min-width: 500px;
+    @apply mx-auto;
+  }
 }
