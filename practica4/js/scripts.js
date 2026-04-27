@@ -102,7 +102,7 @@ function fill(gender, info) {
               >
                 <img
                   class="photo"
-                  src="${player.slider != "/wp-content/themes/padelfiptheme/assets/img/placeholder.png"? player.slider : "../img/placeholder.png"}"
+                  src="${player.slider != "/wp-content/themes/padelfiptheme/assets/img/placeholder.png"? player.slider : "img/placeholder.png"}"
                   alt="${player.name + " " + player.surname }"
                   height="209"
                   width="210" 
