@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-green-600: oklch(62.7% 0.194 149.214);
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-pink-700: oklch(52.5% 0.223 3.958);
     --color-gray-200: oklch(92.8% 0.006 264.531);
@@ -179,6 +178,9 @@
   .ml-5 {
     margin-left: calc(var(--spacing) * 5);
   }
+  .hidden {
+    display: none;
+  }
   .w-1\/8 {
     width: calc(1 / 8 * 100%);
   }
@@ -195,7 +197,7 @@
 }
 body {
   height: 100vh;
-  background: linear-gradient( 0.25turn, rgb(23, 92, 121) 30%, rgb(7, 96, 19), rgb(193, 39, 188) );
+  background: linear-gradient( 0.25turn, rgb(23, 92, 121) 15%, rgb(7, 96, 19), rgb(193, 39, 188) );
 }
 header {
   margin-inline: auto;
@@ -228,7 +230,7 @@ header {
   outline-style: var(--tw-outline-style);
   outline-width: 0px;
 }
-#search_for {
+#search_for, #countrySelect {
   margin-left: calc(var(--spacing) * 3);
   font-size: var(--text-xl);
   line-height: var(--tw-leading, var(--text-xl--line-height));
@@ -301,7 +303,7 @@ header {
 }
 .ranking {
   position: absolute;
-  left: calc(var(--spacing) * -8);
+  left: calc(var(--spacing) * -7);
 }
 .nro_ranking {
   font-size: var(--text-7xl);
@@ -338,9 +340,9 @@ header {
   left: calc(var(--spacing) * -8);
   z-index: 20;
   border-radius: calc(infinity * 1px);
-  background-color: var(--color-green-600);
-  padding-inline: calc(var(--spacing) * 5);
+  padding-inline: calc(var(--spacing) * 3);
   color: var(--color-white);
+  background: rgba(0, 255, 0, 0.5);
 }
 .nation_container {
   position: absolute;
@@ -380,6 +382,10 @@ header {
 }
 .change_page:disabled {
   cursor: auto;
+}
+.profile_in {
+  height: calc(var(--spacing) * 70);
+  width: calc(2 / 1 * 100%);
 }
 @media (max-width: 1024px) {
   body {

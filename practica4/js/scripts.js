@@ -1,192 +1,309 @@
-// "use strict";
+"use strict";
 
-let infoMale = [];
-let infoFemale = [];
-let offsetMale = 0;
-let offsetFemale = 0;
-let info = [];
-let limit = 10;
+const url = "https://www.padelfip.com/es/wp-json/fip/v1/rankings" +
+        "/?category=4fa3a8c3-c5fb-457a-a793-c0c3b5cfbc79&circuit=6ea3dc15-" +
+        "1c19-42ad-99b7-bab78d9fb871&category_name=Master&"
+
+const urlParams = {
+    gender: "male",
+    offset: 0,  
+    country: "",
+    limit: 10
+}
+
+const info = {
+  male: [],
+  female: []
+}
+
+const infoFiltered = {
+  male: [],
+  female: []
+}
+
+const offset = {
+  male: 0,
+  female: 0
+}
+
+let infoMaleToFilter = [];
+let infoFemaleToFilter = [];
+
+let search_for = "name";
 
 window.onload = function() {
+  urlParams.limit = 10;
   load()
 };
 
-function load() {
-  doFetch("male");
-  doFetch("female");
+async function load() {
+    [info.male, info.female] = await Promise.all([
+      doFetch("male"),
+      doFetch("female")
+    ]);
+
+    fill("male", info.male);
+    fill("female", info.female);
 }
 
-function doFetch(gender) {
-    let loading = gender == "male"? document.getElementById("loading_m") : document.getElementById("loading_f");
-    let offset = gender == "male"? offsetMale : offsetFemale;
-    loading.innerText = "Cargando...";    
+async function doFetch(gender) {
+    const loading = gender == "male"? document.getElementById("loading_m") : document.getElementById("loading_f");
+    const fill_list = document.getElementById("list_" + gender);
+    fill_list.innerHTML = "";
+    loading.innerText = "Cargando...";  
+
+    urlParams.gender = gender;
     
-    fetch(
-    "https://www.padelfip.com/es/wp-json/fip/v1/rankings" +
-      "/?category=4fa3a8c3-c5fb-457a-a793-c0c3b5cfbc79&circuit=6ea3dc15-" +
-      "1c19-42ad-99b7-bab78d9fb871&category_name=Master&gender=" + gender + "&offset=" + offset + "&limit=" + limit,
-    { method: "GET",
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    },
-    )
-    .then((response) => { 
-        if (response.ok) {
-          return response.json();
-        } else {
-          loading.innerText = "Error en el servidor";
-          return [];
-        }
-      })
-    .then((res) => {
-        try {
-          loading.innerText = "";
-          if (gender == "male") {
-            infoMale = res;
-            filterPlayers(gender, infoMale);
-          } else {
-            infoFemale = res;
-            filterPlayers(gender, infoFemale);
+    const params = new URLSearchParams(urlParams).toString();
+
+    try {
+      const response = await fetch(
+        url + params,
+        { method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
           }
-        } catch (error) {
-          
         }
-    });
+      );
+      
+      const data = await response.json();
+
+      loading.innerText = data.length < 1? "Sin resultados" : "";
+
+      return data;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function fill(gender, info) {
-    let fill_list = gender == "male"? document.getElementById("listMale") : document.getElementById("listFemale");
-    let offset = gender == "male"? offsetMale : offsetFemale;
+    const fill_list = document.getElementById("list_" + gender);
+    const loading = gender == "male"? document.getElementById("loading_m") : document.getElementById("loading_f");
+
+    if (info.length > 0) {
     
-    arrows(gender, offset, info);
+      arrows(gender, info);
 
-    fill_list.innerHTML = "";
+      fill_list.innerHTML = "";
 
-    for(let i = 0 ; i <= info.length; i++) {
+      info.forEach(player => {
         let newProfile = document.createElement("article");
-        newProfile.innerHTML = `<div class="card">
-          <div class="profile">
-            <div class="ranking">
-              <p class="nro_ranking">${info[i].rank}</p>
+          newProfile.innerHTML = `<div class="card">
+            <div class="profile">
+              <div class="ranking">
+                <p class="nro_ranking">${player.rank}</p>
+              </div>
+              <a
+                class="photo_container" 
+                target="_blank"
+                href="${player.url}"
+                aria-label="${player.name + " " + player.surname }" 
+                title="${player.name + " " + player.surname }"
+              >
+                <img
+                  class="photo"
+                  src="${player.slider != "/wp-content/themes/padelfiptheme/assets/img/placeholder.png"? player.slider : "../img/placeholder.png"}"
+                  alt="${player.name + " " + player.surname }"
+                  height="209"
+                  width="210" 
+                />
+              </a>
             </div>
-            <a
-              class="photo_container"
-              href="${info[i].url}"
-              aria-label="${info[i].name + " " + info[i].rank }" 
-              title="${info[i].name + " " + info[i].rank }"
-            >
-              <img
-                class="photo"
-                src="${info[i].slider != "/wp-content/themes/padelfiptheme/assets/img/placeholder.png"? info[i].slider : "../img/placeholder.png"}"
-                alt="${info[i].name + " " + info[i].rank }"
-                height="209"
-                width="210"
-              />
-            </a>
-          </div>
-          <div class="player_name_container">
-            <a
-              class="player_name"
-              href="${info[i].url}"
-              aria-label="${info[i].name + " " + info[i].rank }"
-              title="${info[i].name + " " + info[i].rank }"
-              >${info[i].name + " " + info[i].rank }</a
-            >
-          </div>
-          <div class="info_container">
-            <span class="move" id="move_${info[i].player_id}">${info[i].move > 0? "+" + info[i].move : info[i].move < 0? info[i].move : ""}</span>
-            <div class="nation_container">
-              <img
-                class="img_nation"
-                src="${info[i].country_flag}"
-                alt="${info[i].country_flag}"
-              />
-              <p class="sig_nation">${info[i].country_name}</p>
+            <div class="player_name_container">
+              <a
+                class="player_name"
+                href="${player.url}"
+                aria-label="${player.name + " " + player.surname }"
+                title="${player.name + " " + player.surname }"
+                >${player.name + " " + player.surname }</a
+              >
             </div>
-            <div class="points_container">
-              <span class="points_title">Puntos</span>
-              <span class="points">${info[i].points}</span>
+            <div class="info_container">
+              <span class="move" id="move_${player.player_id}">${player.move > 0? "+" + player.move : player.move < 0? player.move : ""}</span>
+              <div class="nation_container">
+                <img
+                  class="img_nation"
+                  src="${player.country_flag}"
+                  alt="${player.country_flag}"
+                />
+                <p class="sig_nation">${player.country_name}</p>
+              </div>
+              <div class="points_container">
+                <span class="points_title">Puntos</span>
+                <span class="points">${player.points}</span>
+              </div>
             </div>
-          </div>
-        </div>`;
-        fill_list.appendChild(newProfile);
-        
-        let move = document.getElementById("move_" + info[i].player_id);
-        if (info[i].move < 0) {
-            move.style.color = "red";
-        }
+          </div>`;
+          fill_list.appendChild(newProfile);
+          
+          let move = document.getElementById("move_" + player.player_id);
+          if (player.move < 0) {
+              move.style.background = "rgba(255, 0, 0, 0.5)";
+          }
+      });
+      loading.innerText = "";
+    } else {
+      fill_list.innerHTML = "";
+      loading.innerText = "Sin resultados";
     }
-    
 }
 
-function changePage(genderUpDown) {
+async function changePage(genderUpDown) {
   switch (genderUpDown) {
     case "male-":
-      offsetMale -= 10;
-      doFetch("male");
+      offset.male -= 10;
+      urlParams.offset = offset.male;
+      fill("male", await doFetch("male"));
       break;
     case "male+":
-      offsetMale += 10;
-      doFetch("male");
+      offset.male += 10;
+      urlParams.offset = offset.male;
+      fill("male", await doFetch("male"));
       break;
     case "female-":
-      offsetFemale -= 10;
-      doFetch("female");
+      offset.female -= 10;
+      urlParams.offset = offset.female;
+      fill("female", await doFetch("female"));
       break;
     case "female+":
-      offsetFemale += 10;
-      doFetch("female");
+      offset.female += 10;
+      urlParams.offset = offset.female;
+      fill("female", await doFetch("female"));
       break;
   }
 }
 
-function arrows(gender, offset, info) {
-  if (gender == "male") {
-      if (offset == 0) {
-        document.getElementById("uparrow_male").childNodes[1].src = "img/uparrow_disabled.svg";
-        document.getElementById("uparrow_male").disabled = true;
-      } else {
-        document.getElementById("uparrow_male").childNodes[1].src = "img/uparrow.svg";
-        document.getElementById("uparrow_male").disabled = false;
-      }
-      if (info.length < 10 ){
-        document.getElementById("downarrow_male").childNodes[1].src = "img/downarrow_disabled.svg";
-        document.getElementById("downarrow_male").disabled = true;
-      } else {
-        document.getElementById("downarrow_male").childNodes[1].src = "img/downarrow.svg";
-        document.getElementById("downarrow_male").disabled = false;
-      }
+function arrows(gender, info) {
+  if (offset[gender] == 0) {
+    document.getElementById("uparrow_" + gender).childNodes[1].src = "img/uparrow_disabled.svg";
+    document.getElementById("uparrow_" + gender).disabled = true;
+  } else {
+    document.getElementById("uparrow_" + gender).childNodes[1].src = "img/uparrow.svg";
+    document.getElementById("uparrow_" + gender).disabled = false;
+  }
+  if (urlParams.limit != "") {
+    if (info.length < urlParams.limit ){
+      document.getElementById("downarrow_" + gender).childNodes[1].src = "img/downarrow_disabled.svg";
+      document.getElementById("downarrow_" + gender).disabled = true;
     } else {
-      if (offset == 0) {
-        document.getElementById("uparrow_female").childNodes[1].src = "img/uparrow_disabled.svg";
-        document.getElementById("uparrow_female").disabled = true;
-      } else {
-        document.getElementById("uparrow_female").childNodes[1].src = "img/uparrow.svg";
-        document.getElementById("uparrow_female").disabled = false;
-      }
-      if (info.length < 10 ){
-        document.getElementById("downarrow_female").childNodes[1].src = "img/downarrow_disabled.svg";
-        document.getElementById("downarrow_female").disabled = true;
-      } else {
-        document.getElementById("downarrow_female").childNodes[1].src = "img/downarrow.svg";
-        document.getElementById("downarrow_female").disabled = false;
-      }
-    }
+      document.getElementById("downarrow_" + gender).childNodes[1].src = "img/downarrow.svg";
+      document.getElementById("downarrow_" + gender).disabled = false;
+    } 
+  } else {
+    document.getElementById("downarrow_" + gender).childNodes[1].src = "img/downarrow_disabled.svg";
+    document.getElementById("downarrow_" + gender).disabled = true;
+  }
 }
 
-function filterPlayers(gender, info) {
-  let searchInput = document.getElementById("search").value;
-
-  if (searchInput == "") {
-    limit = 10;
-    fill(gender, info);
+async function filterPlayers(searchInput) {
+  offset.male = 0;
+  offset.female = 0;
+  
+  if (searchInput.value == "") {
+    urlParams.limit = 10;
+    load();
   } else {
-    offsetMale = 0;
-    offsetFemale = 0;
-    limit = "";
-    let infoFiltered = info.filter(player => player.name.toLowerCase().includes(searchInput.toLowerCase()));
-    fill(gender, infoFiltered);
-  }
+    switch (search_for) {
+      case "name":
+        urlParams.limit = "";
+        urlParams.country = "";
+        urlParams.rank = "";
 
+        [info.male, info.female] = await Promise.all([
+          doFetch("male"),
+          doFetch("female")
+        ]);
+
+        infoFiltered.male = info.male.filter(player => 
+            player.name.toLowerCase().includes(searchInput.value.toLowerCase()) || player.surname.toLowerCase().includes(searchInput.value.toLowerCase())
+        );
+        fill("male", infoFiltered.male);
+        
+        infoFiltered.female = info.female.filter(player => 
+            player.name.toLowerCase().includes(searchInput.value.toLowerCase()) || player.surname.toLowerCase().includes(searchInput.value.toLowerCase())
+        );
+        fill("female", infoFiltered.female);
+        
+        break;
+
+      case "country":
+        const countrySelected = document.getElementById("countrySelect").options[document.getElementById("countrySelect").selectedIndex].value;
+        urlParams.limit = "";
+        urlParams.name = "";
+        urlParams.rank = "";
+
+        urlParams.country = countrySelected == "all"? "" : countrySelected;
+        
+        load();
+        break;
+
+      case "ranking":
+        urlParams.limit = "";
+        urlParams.country = "";
+        urlParams.name = "";
+
+        [info.male, info.female] = await Promise.all([
+          doFetch("male"),
+          doFetch("female")
+        ]);
+
+        infoFiltered.male = info.male.filter(player => player.rank == searchInput.value);
+        fill("male", infoFiltered.male);
+        
+        infoFiltered.female = info.female.filter(player => player.rank == searchInput.value);
+        fill("female", infoFiltered.female);
+        
+      default:
+        break;
+    }
+  }
+}
+
+async function changeType(element) {
+  const selected = element.options[element.selectedIndex].value;
+  
+  switch (selected) {
+    case "name":
+      search_for = "name";
+      urlParams.country = "";
+      document.getElementById("search").hidden = false;
+      document.getElementById("countrySelect").hidden = true;
+      document.getElementById("search_rank").hidden = true;
+      const searchInput = document.getElementById("search");
+      searchInput.value = "";
+      filterPlayers(searchInput);
+      break;
+  
+    case "nation":
+      search_for = "country";
+      document.getElementById("search").hidden = true;
+      document.getElementById("search_rank").hidden = true;
+      
+      urlParams.limit = "";
+      await load();
+      let countries = new Set(info.male.map((player) => player.country_name));
+      countries = [...new Set(info.female.map((player) => player.country_name))];
+
+      let countrySelect = document.getElementById("countrySelect");
+
+      countrySelect.innerHTML = "";
+      countrySelect.innerHTML = "<option value='all'>Todos</option>";
+      countries.forEach(country => {
+        let newCountry = `<option value="${country}">${country}</option>`;
+        countrySelect.innerHTML += newCountry;
+      });
+      countrySelect.hidden = false;
+      break;
+    
+    case "ranking":
+      search_for = "ranking";
+      document.getElementById("search").hidden = true;
+      document.getElementById("countrySelect").hidden = true;
+      document.getElementById("search_rank").hidden = false;
+      const searchRank = document.getElementById("search_rank");
+      searchRank.value = "";
+      filterPlayers(searchRank);
+
+      break;
+  }
 }

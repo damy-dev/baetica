@@ -18,12 +18,14 @@
       />
       <div class="search w-4/8">
         <img class="lupa" src="img/lupa.svg" alt="lupa" />
-        <select name="type" id="search_for">
+        <select name="type" id="search_for" onchange="changeType(this)">
           <option value="name">Nombre</option>
           <option value="nation">Nacionalidad</option>
           <option value="ranking">Ranking</option>
         </select>
-        <input type="text" name="search" id="search" oninput="load()"/>
+        <input type="text" name="search" id="search" oninput="filterPlayers(this)"/>
+        <select name="country" id="countrySelect" onchange="filterPlayers(this)" hidden></select>
+        <input type="number" name="search_rank" id="search_rank" oninput="filterPlayers(this)" hidden/>
       </div>
     </header>
     <section class="masc_fem">
@@ -33,8 +35,10 @@
         <button type="button" class="change_page" id="uparrow_male" onclick="changePage('male-')" >
           <img src="img/uparrow.svg" alt="flecha hacia arriba" width="30">
         </button>
-        <div id="listMale"></div>
-        <p class="loading" id="loading_m"></p>
+        <div id="info_male">
+          <p class="loading" id="loading_m"></p>
+          <div id="list_male"></div>
+        </div>
         <button type="button" class="change_page" id="downarrow_male" onclick="changePage('male+')">
           <img src="img/downarrow.svg" alt="flecha hacia abajo" width="30">
         </button>
@@ -45,8 +49,10 @@
         <button type="button" class="change_page" id="uparrow_female" onclick="changePage('female-')">
           <img src="img/uparrow.svg" alt="flecha hacia abajo" width="30">
         </button>
-        <div id="listFemale"></div>
-        <p class="loading" id="loading_f"></p>
+        <div id="info_male">
+          <p class="loading" id="loading_f"></p>
+          <div id="list_female"></div>
+        </div>
         <button type="button" class="change_page" id="downarrow_female" onclick="changePage('female+')">
           <img src="img/downarrow.svg" alt="flecha hacia abajo" width="30">
         </button>

@@ -4,7 +4,7 @@ body {
   height: 100vh;
   background: linear-gradient(
     0.25turn,
-    rgb(23, 92, 121) 30%,
+    rgb(23, 92, 121) 15%,
     rgb(7, 96, 19),
     rgb(193, 39, 188)
   );
@@ -27,7 +27,7 @@ header {
   @apply outline-0 ml-5 text-2xl;
 }
 
-#search_for {
+#search_for, #countrySelect {
   @apply outline-0 text-xl ml-3;
 }
 
@@ -54,7 +54,7 @@ header {
 }
 
 .loading {
-  @apply text-xl text-center text-white mt-5;
+  @apply text-xl text-white text-center mt-5;
 }
 
 .card {
@@ -69,7 +69,7 @@ header {
 }
 
 .ranking {
-  @apply absolute -left-8;
+  @apply absolute -left-7;
 }
 
 .nro_ranking {
@@ -96,7 +96,8 @@ header {
 }
 
 .move {
-  @apply -left-8 top-5 text-white absolute z-20 bg-green-600 px-5 rounded-full;
+  @apply -left-8 top-5 text-white absolute z-20 px-3 rounded-full;
+  background: rgba(0, 255, 0, 0.5);
 }
 
 .nation_container {
@@ -127,6 +128,10 @@ header {
 
 .change_page:disabled {
   @apply cursor-auto;
+}
+
+.profile_in {
+  @apply w-2/1 h-70;
 }
 
 @media (max-width: 1024px) {
