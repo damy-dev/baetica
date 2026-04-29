@@ -1,0 +1,412 @@
+{
+  "name": "practica5",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "results",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -288,
+        0
+      ],
+      "id": "640b5153-ac52-4ecf-90dd-edee8a3c1a6b",
+      "name": "Input Form",
+      "webhookId": "f6a9bc70-a8cc-457f-9919-e66058fb9d28"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1m84Oe-2riZc1qZKsdGS9hONHTY1xGaM6xR3kfFF-CE0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Postulantes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1m84Oe-2riZc1qZKsdGS9hONHTY1xGaM6xR3kfFF-CE0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "LinkedIn": "={{ $json.body.perfil_linkedin }}",
+            "Disponibilidad": "={{ $json.body.disponibilidad }}",
+            "Puesto Preferido": "={{ $json.body.puesto_requerido }}",
+            "Experiencia Laboral": "={{ $json.body.experiencia }}",
+            "Nivel de Estudios": "={{ $json.body.estudios }}",
+            "Carnet de Conducir": "={{ $json.body.carnet_conducir }}",
+            "Teléfono": "={{ $json.body.telefono }}",
+            "Email": "={{ $json.body.email }}",
+            "CP": "={{ $json.body.cp }}",
+            "Ciudad": "={{ $json.body.ciudad }}",
+            "Direccion": "={{ $json.body.direccion }}",
+            "DNI": "={{ $json.body.dni }}",
+            "Fecha de Nacimiento": "={{ $json.body.fecha_nac }}",
+            "Apellidos": "={{ $json.body.apellidos }}",
+            "Nombre": "={{ $json.body.nombre }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Apellidos",
+              "displayName": "Apellidos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha de Nacimiento",
+              "displayName": "Fecha de Nacimiento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DNI",
+              "displayName": "DNI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Direccion",
+              "displayName": "Direccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ciudad",
+              "displayName": "Ciudad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CP",
+              "displayName": "CP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Carnet de Conducir",
+              "displayName": "Carnet de Conducir",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nivel de Estudios",
+              "displayName": "Nivel de Estudios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Experiencia Laboral",
+              "displayName": "Experiencia Laboral",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Puesto Preferido",
+              "displayName": "Puesto Preferido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Disponibilidad",
+              "displayName": "Disponibilidad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "headers",
+              "displayName": "headers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "params",
+              "displayName": "params",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "webhookUrl",
+              "displayName": "webhookUrl",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "executionMode",
+              "displayName": "executionMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "21f047c4-61fb-4805-b8e9-fee2134fcfaa",
+      "name": "Add data in Google Sheets",
+      "alwaysOutputData": false,
+      "notesInFlow": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jYw58VjiI8xAP7CN",
+          "name": "Google Sheets account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "1168186611",
+        "text": "=Nueva solicitud de empleo:\nNombre: {{ $json.Nombre }}\nApellidos: {{ $json.Apellidos }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        -16
+      ],
+      "id": "c690b452-cc03-4b37-8d92-582fb2260f74",
+      "name": "Telegram Notification",
+      "webhookId": "1195eeed-cac1-4552-ad94-b5553f3148dc",
+      "credentials": {
+        "telegramApi": {
+          "id": "qHvQ0KgpJi2Fph8M",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "damaspcmail.com",
+        "subject": "=Nueva solicitud de empleo : {{ $('Add data in Google Sheets').item.json.Nombre }} {{ $('Add data in Google Sheets').item.json.Apellidos }}",
+        "message": "=<h2>Datos Personales</h2>\n<p>Nombre: {{ $('Add data in Google Sheets').item.json.Nombre }}</p>\n<p>Apellidos: {{ $('Add data in Google Sheets').item.json.Apellidos }}</p>\n<p>Fecha de Nacimiento: {{ $('Add data in Google Sheets').item.json['Fecha de Nacimiento'] }}</p>\n<p>DNI: {{ $('Add data in Google Sheets').item.json.DNI }}</p>\n<p>Direccion: {{ $('Add data in Google Sheets').item.json.Direccion }}</p>\n<p>Ciudad: {{ $('Add data in Google Sheets').item.json.Ciudad }}</p>\n<p>CP: {{ $('Add data in Google Sheets').item.json.CP }}</p>\n<p>Email: {{ $('Add data in Google Sheets').item.json.Email }}</p>\n<p>Teléfono: {{ $('Add data in Google Sheets').item.json['Teléfono'] }}</p>\n\n<h2>Datos Laborales</h2>\n<p>Carnet de Conducir: {{ $('Add data in Google Sheets').item.json['Carnet de Conducir'] }}</p>\n<p>Nivel de Estudios: {{ $('Add data in Google Sheets').item.json['Nivel de Estudios'] }}</p>\n<p>Experiencia Laboral: {{ $('Add data in Google Sheets').item.json['Experiencia Laboral'] }}</p>\n\n<h2>Puesto Requerido</h2>\n<p>Puesto Preferido: {{ $('Add data in Google Sheets').item.json['Puesto Preferido'] }}</p>\n<p>Disponibilidad: {{ $('Add data in Google Sheets').item.json.Disponibilidad }}</p>\n<p>Perfil de LinkedIn: {{ $('Add data in Google Sheets').item.json.LinkedIn }}</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        512,
+        -16
+      ],
+      "id": "2237362e-9b65-4cbc-9d9a-ff35374ff059",
+      "name": "Email with All Data",
+      "webhookId": "002573d7-3ee9-4a6b-be4c-a3711dfe918d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "N5Qkpicxmd2OCx7a",
+          "name": "Gmail account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        256,
+        240
+      ],
+      "id": "9d244393-0e83-486f-bb07-0db4b9be7114",
+      "name": "Response to Form"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Input Form": {
+      "main": [
+        [
+          {
+            "node": "Add data in Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add data in Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Telegram Notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response to Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Notification": {
+      "main": [
+        [
+          {
+            "node": "Email with All Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email with All Data": {
+      "main": [
+        [
+          {
+            "node": "Response to Form",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response to Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "8947922c-b7e3-4ca0-90c9-96f58b950628",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "603fe44794c79145f26873cf195b9fc1b3e25868fdf510a15bbed891bb622bde"
+  },
+  "id": "dr4w86AtBbXOqx8V",
+  "tags": []
+}

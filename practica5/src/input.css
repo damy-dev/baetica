@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  /* Colores de Fondo (Atmósfera Dark) */
+  --bg-main: #0d1117;        /* Fondo profundo de la web */
+  --bg-card: #1f2937;        /* Fondo de secciones y tarjetas */
+  --bg-input: #161b22;       /* Fondo de los campos del formulario */
+
+  /* Colores de Acento (Identidad Visual) */
+  --primary-cyan: #00d2ff;   /* El color eléctrico del logo */
+  --primary-blue: #3a7bd5;   /* Azul cobalto para degradados */
+  --accent-orange: #ff5722;  /* Naranja para botones críticos o avisos */
+  
+  /* Colores de Texto */
+  --text-bright: #f0f4f8;    /* Texto principal (casi blanco) */
+  --text-muted: #9ca3af;     /* Texto secundario o leyendas */
+  --text-dark: #06090f;      /* Para texto sobre botones claros */
+
+  /* Estados y Bordes */
+  --border-color: #30363d;   /* Bordes sutiles de UI */
+  --focus-glow: rgba(0, 210, 255, 0.5); /* Brillo para el focus de inputs */
+
+  /* Gradientes */
+  --grad-linear: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+  --grad-orange: linear-gradient(135deg, #ff5722, #e64a19);
+  --grad-black: linear-gradient(180deg, #202b32, var(--bg-main));
+}
+
+* {
+    @apply text-[var(--text-bright)];
+    scroll-behavior: smooth;
+    font-family: "Michroma";
+}
+
+body {
+    @apply bg-[var(--bg-main)] w-[100vw];
+}
+
+.synth {
+    @apply absolute w-3 h-4 bg-[var(--accent-orange)] rounded-xl;
+    transform: scaleY(1);
+    animation: pass 1s linear infinite;
+}
+
+.synth:nth-child(2) {
+    @apply ml-10;
+    animation-delay: 300ms;
+}
+
+.synth:nth-child(3) {
+    @apply ml-20;
+    animation-delay: 600ms;
+}
+
+.synth:nth-child(4) {
+    @apply ml-30;
+    animation-delay: 900ms;
+}
+
+.synth:nth-child(5) {
+    @apply ml-40;
+    animation-delay: 1200ms;
+}
+
+@keyframes pass {
+    25% {
+        transform: scaleY(5);
+        background: var(--primary-cyan);
+    }
+    50% {
+        transform: scaleY(10);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+header {
+    background: var(--grad-black);
+    @apply w-[100vw];
+}
+
+#logo {
+    @apply w-100 mx-auto p-10;
+}
+
+main {
+    @apply w-6/7 mx-auto bg-[var(--bg-main)];
+}
+
+.main_title {
+    font-family: "Orbitron";
+    @apply text-5xl my-20 text-[var(--accent-orange)];
+}
+
+.about_us {
+    @apply text-2xl text-justify grid grid-cols-3 gap-50;
+    cursor: url("../img/speaker.png"), auto;
+}
+
+.wave_l {
+    @apply relative my-auto mx-auto;
+}
+
+.about_us h3 {
+    @apply text-[var(--primary-blue)] col-span-2;
+}
+
+.main_section {
+    @apply my-20;
+}
+
+.profiles_title {
+    @apply text-center text-2xl mb-20 text-[var(--accent-orange)];
+}
+
+.profiles_section {
+    @apply w-[100%] flex flex-row gap-20 mx-auto;
+}
+
+
+.profile {
+    @apply opacity-80 bg-[var(--bg-card)] p-5 w-1/4 rounded border-2 border-[var(--border-color)] hover:shadow-2xl shadow-blue-500 cursor-pointer;
+}
+
+.profile:hover {
+    @apply opacity-100 transition-opacity;
+}
+
+.profile img {
+    @apply w-20 mx-auto;
+
+}
+
+.profile h3 {
+    @apply text-center font-bold my-4 text-[var(--accent-orange)];
+}
+
+.profile p {
+    @apply text-justify;
+}
+
+form {
+    @apply border-[var(--border-color)] max-w-6xl mx-auto mb-30 border-2 rounded-xl p-10 shadow-2xl shadow-blue-400;
+    background: var(--grad-black);
+}
+
+form fieldset {
+    @apply grid grid-cols-2 border-2 rounded-xl gap-10 py-10;
+}
+
+fieldset legend {
+    @apply mx-10 p-3;
+}
+
+.form-group {
+    @apply m-2 flex flex-col relative;
+}
+
+label {
+    @apply -top-7 mx-7 absolute;
+    color: var(--primary-blue);
+}
+
+.form-group input+label, .form-group textarea+label {
+    @apply top-2 mx-7 absolute;
+    color: var(--primary-blue);
+    transition: transform 0.3s, background 0.3s ease;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    @apply mx-5 outline-1 p-5;
+}
+
+textarea {
+    grid-column: 1/3;
+}
+
+.form-group input:focus+label, .form-group input:valid+label, .form-group textarea:focus+label, .form-group textarea:valid+label {
+    transform: translateY(-33px);
+}
+
+#submitBtn {
+    @apply px-10 py-5 w-full mx-auto mt-10 rounded-xl opacity-70 transition-opacity;
+    background: var(--grad-orange);
+}
+
+#submitBtn:hover {
+    @apply cursor-pointer opacity-100;
+}
+
+.response {
+    @apply text-center py-5;
+}
