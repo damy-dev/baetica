@@ -1,8 +1,8 @@
 const formDestiny = "http://localhost:5678/webhook-test/results";
 
 window.onload = function() {
-    const f = document.talentForm;
-    f.onsubmit = verification;
+    // const f = document.talentForm;
+    // f.onSubmit = verification;
 }
 
 function soundEffect(freq_start = 700, freq_end = 700, time = 1) {
@@ -30,37 +30,52 @@ function changePosition(element) {
     puesto_requerido.value = element.id;
 }
 
-async function verification(event) {
+async function verification(token) {
     const f = document.talentForm;
-    event.preventDefault();
+    
+    await grecaptcha.ready(() => {
+        grecaptcha.execute("6Lc7SdEsAAAAAIwx2lrNtpLdiALBvX4EKe0TikeU", {action: "registry"})
+            .then((token) => {
+                f.prepend("<input type='hidden' name='token' value='" + token + "'>");
+                f.prepend("<input type='hidden' name='action' value='registry'>");
+        });
+    });
+    
 
     const data = new FormData(f);
-    const jsonData = Object.fromEntries(data.entries());
+
+    if (f.cv.value == "") {
+        data.delete("cv");
+    }
 
     try {
         const response = await fetch(formDestiny, 
             {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(jsonData)
+                body: data
             }
         );
+
+        const result = await response.json();
         
-        const form = document.getElementById("talentForm");
-        let p = document.createElement("p");
-        p.innerText = "Solicitud procesada correctamente. En breve nos pondremos en contacto contigo";
-        p.classList.add("response");
-        form.appendChild(p);
-        document.getElementById("submitBtn").hidden = true;
+        if (result[0].error) {
+            showResponse(true, "No se ha podido procesar su solicitud");
+        } else {
+            showResponse(false, "Solicitud procesada correctamente. En breve nos pondremos en contacto contigo");
+            document.getElementById("submitBtn").hidden = true;
+        }
 
     } catch (error) {
-        const form = document.getElementById("talentForm");
-        let p = document.createElement("p");
-        p.innerText = "No se ha podido procesar su solicitud";
-        p.classList.add("response");
-        p.style.color = "red";
-        form.appendChild(p);
+        showResponse(true, "No se ha podido procesar su solicitud");
     }
 }
+
+function showResponse(error = false, message) {
+    const response = document.getElementById("response");
+    response.innerText = message;
+    response.style.color = error? "red" : "white";
+}
+
+// function onSubmit(token) {
+//     document.getElementById("talentForm").submit();
+// }

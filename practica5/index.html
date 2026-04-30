@@ -4,19 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&family=Roboto+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="js/script.js"></script>
     <title>Buscamos Talentos</title>
   </head>
   <body>
-    
     <header>
-      
       <div id="logo">
         <img src="img/logo_no_bg.png" alt="Logo" />
       </div>
-      
     </header>
 
     <main>
@@ -40,50 +44,54 @@
       <section class="main_section" loading="lazy">
         <h2 class="profiles_title">¿Que tipo de perfiles buscamos?</h2>
         <section class="profiles_section">
-            
-              <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-                <a href="#talentForm" id="Ingeniero_de_Hardware" onclick="changePosition(this)">
-                  <img src="img/hardware.svg" alt="Hardware">
-                  <h3>Ingeniería de Audio (Hardware)</h3>
-                  <p>
-                    Expertos en diseño de circuitos, filtros VCF y manejo de señales analógicas. Si sueñas con esquemáticos,
-                    este es tu sitio
-                  </p>
-                </a>
-              </article>
-         
-            <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-              <a href="#talentForm" id="Desarrollador_de_Software" onclick="changePosition(this)">
-                <img src="img/software.svg" alt="Software">
-                <h3>Firmware & Software Devs</h3>
-                <p>
-                  Buscamos magos de C++ y DSP (Procesamiento Digital de Señales) que puedan reducir la latencia al mínimo
-                  absoluto
-                </p>
-              </a>
-            </article>
-            <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-              <a href="#talentForm" id="Diseño_Industrial" onclick="changePosition(this)">
-                <img src="img/ux.svg" alt="UX">
-                <h3>Diseño Industrial y UX</h3>
-                <p>
-                  Para nosotros, un sintetizador es una extensión del músico. Buscamos diseñadores que entiendan la ergonomía
-                  de un potenciómetro y la belleza de una interfaz táctil
-                </p>
-              </a>
-            </article>
-    
-            <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-              <a href="#talentForm" id="Montaje" onclick="changePosition(this)">
-                <img src="img/screwdriver.svg" alt="Screwdriver">
-                <h3>Artesanos de Montaje</h3>
-                <p>Manos precisas para el ensamblaje final y control de calidad. Cada tecla debe sentirse perfecta</p>
-              </a>
-            </article>
+          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
+            <a href="#talentForm" id="Ingeniero_de_Hardware" onclick="changePosition(this)">
+              <img src="img/hardware.svg" alt="Hardware" />
+              <h3>Ingeniería de Audio (Hardware)</h3>
+              <p>
+                Expertos en diseño de circuitos, filtros VCF y manejo de señales analógicas. Si sueñas con esquemáticos,
+                este es tu sitio
+              </p>
+            </a>
+          </article>
+
+          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
+            <a href="#talentForm" id="Desarrollador_de_Software" onclick="changePosition(this)">
+              <img src="img/software.svg" alt="Software" />
+              <h3>Firmware & Software Devs</h3>
+              <p>
+                Buscamos magos de C++ y DSP (Procesamiento Digital de Señales) que puedan reducir la latencia al mínimo
+                absoluto
+              </p>
+            </a>
+          </article>
+          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
+            <a href="#talentForm" id="Diseño_Industrial" onclick="changePosition(this)">
+              <img src="img/ux.svg" alt="UX" />
+              <h3>Diseño Industrial y UX</h3>
+              <p>
+                Para nosotros, un sintetizador es una extensión del músico. Buscamos diseñadores que entiendan la
+                ergonomía de un potenciómetro y la belleza de una interfaz táctil
+              </p>
+            </a>
+          </article>
+
+          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
+            <a href="#talentForm" id="Montaje" onclick="changePosition(this)">
+              <img src="img/screwdriver.svg" alt="Screwdriver" />
+              <h3>Artesanos de Montaje</h3>
+              <p>Manos precisas para el ensamblaje final y control de calidad. Cada tecla debe sentirse perfecta</p>
+            </a>
+          </article>
         </section>
       </section>
 
-      <form name="talentForm" id="talentForm" action="http://localhost:5678/webhook-test/results" method="POST">
+      <form
+        name="talentForm"
+        id="talentForm"
+        action="http://localhost:5678/webhook-test/results"
+        method="POST"
+      >
         <h3 class="profiles_title">Únete a nosotros. Nos hace falta tu talento</h3>
         <fieldset>
           <legend>Datos Personales</legend>
@@ -99,7 +107,7 @@
           </div>
 
           <div class="form-group">
-            <input type="date" id="fecha_nac" name="fecha_nac" required/>
+            <input type="date" id="fecha_nac" name="fecha_nac" required />
             <label for="fecha_nac">Fecha de Nacimiento</label>
           </div>
 
@@ -167,15 +175,20 @@
             <label for="estudios">Nivel de estudios</label>
           </div>
 
-          <div class="form-group">
+          <div class="form-group double-col">
             <textarea
               id="experiencia"
               name="experiencia"
               rows="4"
-              placeholder="Cuéntanos tus trabajos anteriores..." 
+              placeholder="Cuéntanos tus trabajos anteriores..."
               required
             ></textarea>
             <label for="experiencia">Experiencia previa</label>
+          </div>
+
+          <div class="form-group double-col">
+            <input type="file" name="cv" id="cv" accept=".doc, .docx, .pdf" />
+            <label for="cv">Curriculum</label>
           </div>
         </fieldset>
 
@@ -206,13 +219,24 @@
               type="url"
               id="perfil_linkedin"
               name="perfil_linkedin"
-              placeholder="https://www.linkedin.com/in/tu-perfil" 
+              placeholder="https://www.linkedin.com/in/tu-perfil"
             />
             <label for="perfil_linkedin">Perfil de LinkedIn</label>
           </div>
         </fieldset>
 
-        <button type="submit" id="submitBtn" onmousedown="soundEffect(100, 7000, 3)">Enviar Candidatura</button>
+        <button
+          type="submit"
+          id="submitBtn"
+          class="g-recaptcha"
+          data-sitekey="6Lc7SdEsAAAAAIwx2lrNtpLdiALBvX4EKe0TikeU"
+          data-callback="verification"
+          data-action="submit"
+          onmousedown="soundEffect(100, 7000, 3)"
+        >
+          Enviar Candidatura
+        </button>
+        <p class="response" id="response"></p>
       </form>
     </main>
   </body>

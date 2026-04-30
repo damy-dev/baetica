@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-800: oklch(44.4% 0.177 26.899);
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --spacing: 0.25rem;
@@ -178,9 +177,6 @@
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-  .text-red-800 {
-    color: var(--color-red-800);
   }
 }
 :root {
@@ -397,11 +393,21 @@ label {
   outline-style: var(--tw-outline-style);
   outline-width: 1px;
 }
-textarea {
+.double-col {
   grid-column: 1/3;
 }
 .form-group input:focus+label, .form-group input:valid+label, .form-group textarea:focus+label, .form-group textarea:valid+label {
   transform: translateY(-33px);
+}
+input::file-selector-button {
+  border-radius: var(--radius-xl);
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 2);
+  opacity: 70%;
+  transition-property: opacity;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  background: var(--grad-orange);
 }
 #submitBtn {
   margin-inline: auto;
