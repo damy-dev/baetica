@@ -1,8 +1,11 @@
-const formDestiny = "http://localhost:5678/webhook-test/results";
+const formDestiny = "http://localhost:5678/webhook/results";
 
-window.onload = function() {
-    // const f = document.talentForm;
-    // f.onSubmit = verification;
+window.onload = function () {
+    const inputs = document.querySelectorAll(".form-group input");
+
+    inputs.forEach(input => {
+        input.addEventListener("input", resetField);
+    });
 }
 
 function soundEffect(freq_start = 700, freq_end = 700, time = 1) {
@@ -32,7 +35,21 @@ function changePosition(element) {
 
 async function verification(token) {
     const f = document.talentForm;
+    const submit = document.getElementById("submitBtn");
+
+    const inputs = document.querySelectorAll(".form-group input");
     
+    inputs.forEach(input => {
+        if (!input.reportValidity()) {
+            input.style.outlineColor = "red";
+        }
+    });
+
+    if (!f.checkValidity()) {
+        soundEffect(800, 300, .5);
+        return false;
+    }
+
     await grecaptcha.ready(() => {
         grecaptcha.execute("6Lc7SdEsAAAAAIwx2lrNtpLdiALBvX4EKe0TikeU", {action: "registry"})
             .then((token) => {
@@ -40,7 +57,6 @@ async function verification(token) {
                 f.prepend("<input type='hidden' name='action' value='registry'>");
         });
     });
-    
 
     const data = new FormData(f);
 
@@ -49,6 +65,9 @@ async function verification(token) {
     }
 
     try {
+        soundEffect(100, 7000, 3);
+        submit.innerText = "Enviando datos..."
+
         const response = await fetch(formDestiny, 
             {
                 method: "POST",
@@ -59,6 +78,7 @@ async function verification(token) {
         const result = await response.json();
         
         if (result[0].error) {
+            submit.innerText = "Enviar Candidatura";
             showResponse(true, "No se ha podido procesar su solicitud");
         } else {
             showResponse(false, "Solicitud procesada correctamente. En breve nos pondremos en contacto contigo");
@@ -66,6 +86,7 @@ async function verification(token) {
         }
 
     } catch (error) {
+        submit.innerText = "Enviar Candidatura";
         showResponse(true, "No se ha podido procesar su solicitud");
     }
 }
@@ -76,6 +97,6 @@ function showResponse(error = false, message) {
     response.style.color = error? "red" : "white";
 }
 
-// function onSubmit(token) {
-//     document.getElementById("talentForm").submit();
-// }
+function resetField() {
+    this.style.outlineColor = "white";
+}

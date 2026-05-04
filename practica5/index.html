@@ -26,7 +26,7 @@
     <main>
       <h1 class="main_title">Esculpiendo el sonido del mañana</h1>
 
-      <div class="about_us" onmousedown="soundEffect(100, 7000, 3)">
+      <div class="about_us" onmousedown="soundEffect(261.62, 261.62, 5);soundEffect(329.62, 329.62, 5);soundEffect(391.99, 391.99, 5);">
         <div class="wave_l">
           <div class="synth"></div>
           <div class="synth"></div>
@@ -44,8 +44,8 @@
       <section class="main_section" loading="lazy">
         <h2 class="profiles_title">¿Que tipo de perfiles buscamos?</h2>
         <section class="profiles_section">
-          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-            <a href="#talentForm" id="Ingeniero_de_Hardware" onclick="changePosition(this)">
+          <article class="profile" onclick="soundEffect(1000, 1200, 0.5)">
+            <a href="#talentForm" id="Ingeniero de Hardware" onclick="changePosition(this)">
               <img src="img/hardware.svg" alt="Hardware" />
               <h3>Ingeniería de Audio (Hardware)</h3>
               <p>
@@ -55,8 +55,8 @@
             </a>
           </article>
 
-          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-            <a href="#talentForm" id="Desarrollador_de_Software" onclick="changePosition(this)">
+          <article class="profile" onclick="soundEffect(1000, 1200, 0.5)">
+            <a href="#talentForm" id="Desarrollador de Software" onclick="changePosition(this)">
               <img src="img/software.svg" alt="Software" />
               <h3>Firmware & Software Devs</h3>
               <p>
@@ -65,8 +65,8 @@
               </p>
             </a>
           </article>
-          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
-            <a href="#talentForm" id="Diseño_Industrial" onclick="changePosition(this)">
+          <article class="profile" onclick="soundEffect(1000, 1200, 0.5)">
+            <a href="#talentForm" id="Diseño Industrial" onclick="changePosition(this)">
               <img src="img/ux.svg" alt="UX" />
               <h3>Diseño Industrial y UX</h3>
               <p>
@@ -76,7 +76,7 @@
             </a>
           </article>
 
-          <article class="profile" onclick="soundEffect(1200, 100, 0.5)">
+          <article class="profile" onclick="soundEffect(1000, 1200, 0.5)">
             <a href="#talentForm" id="Montaje" onclick="changePosition(this)">
               <img src="img/screwdriver.svg" alt="Screwdriver" />
               <h3>Artesanos de Montaje</h3>
@@ -86,59 +86,61 @@
         </section>
       </section>
 
-      <form
-        name="talentForm"
-        id="talentForm"
-        action="http://localhost:5678/webhook-test/results"
-        method="POST"
-      >
+      <form name="talentForm" id="talentForm" action="http://localhost:5678/webhook-test/results" method="POST">
         <h3 class="profiles_title">Únete a nosotros. Nos hace falta tu talento</h3>
         <fieldset>
           <legend>Datos Personales</legend>
 
           <div class="form-group">
-            <input type="text" id="nombre" name="nombre" required />
-            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="" required />
+            <label for="nombre">Nombre *</label>
           </div>
 
           <div class="form-group">
-            <input type="text" id="apellidos" name="apellidos" required />
-            <label for="apellidos">Apellido</label>
+            <input type="text" id="apellidos" name="apellidos" placeholder="" required />
+            <label for="apellidos">Apellido *</label>
           </div>
 
           <div class="form-group">
-            <input type="date" id="fecha_nac" name="fecha_nac" required />
-            <label for="fecha_nac">Fecha de Nacimiento</label>
+            <input type="date" id="fecha_nac" name="fecha_nac" placeholder="" required />
+            <label for="fecha_nac">Fecha de Nacimiento *</label>
           </div>
 
           <div class="form-group">
-            <input type="text" id="dni" name="dni" required />
-            <label for="dni">DNI / NIE</label>
+            <input
+              type="text"
+              id="dni"
+              name="dni"
+              placeholder=""
+              pattern="^([0-9]{8}|[XYZ][0-9]{7})[TRWAGMYFPDXBNJZSQVHLCKE]$"
+              required
+            />
+            <label for="dni">DNI / NIE *</label>
           </div>
 
           <div class="form-group">
-            <input type="text" id="direccion" name="direccion" required />
-            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" placeholder="" required />
+            <label for="direccion">Dirección *</label>
           </div>
 
           <div class="form-group">
-            <input type="text" id="ciudad" name="ciudad" required />
-            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" placeholder="" required />
+            <label for="ciudad">Ciudad *</label>
           </div>
 
           <div class="form-group">
-            <input type="text" id="cp" name="cp" required />
+            <input type="number" id="cp" name="cp" placeholder="" />
             <label for="cp">Código Postal</label>
           </div>
 
           <div class="form-group">
-            <input type="email" id="email" name="email" required />
-            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" placeholder="" required />
+            <label for="email">Correo Electrónico *</label>
           </div>
 
           <div class="form-group">
-            <input type="tel" id="telefono" name="telefono" required />
-            <label for="telefono">Teléfono</label>
+            <input type="number" id="telefono" name="telefono" placeholder="" required />
+            <label for="telefono">Teléfono *</label>
           </div>
         </fieldset>
 
@@ -181,7 +183,6 @@
               name="experiencia"
               rows="4"
               placeholder="Cuéntanos tus trabajos anteriores..."
-              required
             ></textarea>
             <label for="experiencia">Experiencia previa</label>
           </div>
@@ -197,9 +198,9 @@
 
           <div class="form-group">
             <select id="puesto_requerido" name="puesto_requerido">
-              <option value="Ingeniero_de_Hardware">Ingeniería de Hardware</option>
-              <option value="Desarrollador_de_Software">Desarrollo de Firmware</option>
-              <option value="Diseño_Industrial">Diseño Industrial</option>
+              <option value="Ingeniero de Hardware">Ingeniería de Hardware</option>
+              <option value="Desarrollador de Software">Desarrollo de Firmware</option>
+              <option value="Diseño Industrial">Diseño Industrial</option>
               <option value="Montaje">Artesano de Montaje</option>
             </select>
             <label for="puesto_requerido">Puesto preferido</label>
@@ -219,7 +220,7 @@
               type="url"
               id="perfil_linkedin"
               name="perfil_linkedin"
-              placeholder="https://www.linkedin.com/in/tu-perfil"
+              placeholder=""
             />
             <label for="perfil_linkedin">Perfil de LinkedIn</label>
           </div>
@@ -232,7 +233,6 @@
           data-sitekey="6Lc7SdEsAAAAAIwx2lrNtpLdiALBvX4EKe0TikeU"
           data-callback="verification"
           data-action="submit"
-          onmousedown="soundEffect(100, 7000, 3)"
         >
           Enviar Candidatura
         </button>

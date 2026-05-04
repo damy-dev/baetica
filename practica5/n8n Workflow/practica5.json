@@ -6,17 +6,20 @@
         "httpMethod": "POST",
         "path": "results",
         "responseMode": "responseNode",
-        "options": {}
+        "options": {
+          "binaryPropertyName": "=cv"
+        }
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -288,
-        0
+        -96,
+        -448
       ],
       "id": "640b5153-ac52-4ecf-90dd-edee8a3c1a6b",
       "name": "Input Form",
-      "webhookId": "f6a9bc70-a8cc-457f-9919-e66058fb9d28"
+      "webhookId": "f6a9bc70-a8cc-457f-9919-e66058fb9d28",
+      "notesInFlow": false
     },
     {
       "parameters": {
@@ -36,21 +39,22 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "LinkedIn": "={{ $json.body.perfil_linkedin }}",
-            "Disponibilidad": "={{ $json.body.disponibilidad }}",
-            "Puesto Preferido": "={{ $json.body.puesto_requerido }}",
-            "Experiencia Laboral": "={{ $json.body.experiencia }}",
-            "Nivel de Estudios": "={{ $json.body.estudios }}",
-            "Carnet de Conducir": "={{ $json.body.carnet_conducir }}",
-            "Teléfono": "={{ $json.body.telefono }}",
-            "Email": "={{ $json.body.email }}",
-            "CP": "={{ $json.body.cp }}",
-            "Ciudad": "={{ $json.body.ciudad }}",
-            "Direccion": "={{ $json.body.direccion }}",
-            "DNI": "={{ $json.body.dni }}",
-            "Fecha de Nacimiento": "={{ $json.body.fecha_nac }}",
-            "Apellidos": "={{ $json.body.apellidos }}",
-            "Nombre": "={{ $json.body.nombre }}"
+            "Nombre": "={{ $('Input Form').item.json.body.nombre }}",
+            "Apellidos": "={{ $('Input Form').item.json.body.apellidos }}",
+            "Fecha de Nacimiento": "={{ $('Input Form').item.json.body.fecha_nac }}",
+            "DNI": "={{ $('Input Form').item.json.body.dni }}",
+            "Direccion": "={{ $('Input Form').item.json.body.direccion }}",
+            "Ciudad": "={{ $('Input Form').item.json.body.ciudad }}",
+            "CP": "={{ $('Input Form').item.json.body.cp }}",
+            "Email": "={{ $('Input Form').item.json.body.email }}",
+            "Teléfono": "={{ $('Input Form').item.json.body.telefono }}",
+            "Carnet de Conducir": "={{ $('Input Form').item.json.body.carnet_conducir }}",
+            "Nivel de Estudios": "={{ $('Input Form').item.json.body.estudios }}",
+            "Experiencia Laboral": "={{ $('Input Form').item.json.body.experiencia }}",
+            "Puesto Preferido": "={{ $('Input Form').item.json.body.puesto_requerido }}",
+            "Disponibilidad": "={{ $('Input Form').item.json.body.disponibilidad }}",
+            "LinkedIn": "={{ $('Input Form').item.json.body.perfil_linkedin }}",
+            "CV": "={{ $json.webViewLink }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -190,64 +194,13 @@
               "canBeUsedToMatch": true
             },
             {
-              "id": "headers",
-              "displayName": "headers",
+              "id": "CV",
+              "displayName": "CV",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "params",
-              "displayName": "params",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "query",
-              "displayName": "query",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "body",
-              "displayName": "body",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "webhookUrl",
-              "displayName": "webhookUrl",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "executionMode",
-              "displayName": "executionMode",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
+              "canBeUsedToMatch": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -258,8 +211,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -48,
-        0
+        -112,
+        -176
       ],
       "id": "21f047c4-61fb-4805-b8e9-fee2134fcfaa",
       "name": "Add data in Google Sheets",
@@ -282,8 +235,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        240,
-        -16
+        112,
+        -192
       ],
       "id": "c690b452-cc03-4b37-8d92-582fb2260f74",
       "name": "Telegram Notification",
@@ -298,19 +251,33 @@
     },
     {
       "parameters": {
-        "sendTo": "damaspcmail.com",
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        800,
+        -80
+      ],
+      "id": "9d244393-0e83-486f-bb07-0db4b9be7114",
+      "name": "Response to Form"
+    },
+    {
+      "parameters": {
+        "sendTo": "damaspc@gmail.com",
         "subject": "=Nueva solicitud de empleo : {{ $('Add data in Google Sheets').item.json.Nombre }} {{ $('Add data in Google Sheets').item.json.Apellidos }}",
-        "message": "=<h2>Datos Personales</h2>\n<p>Nombre: {{ $('Add data in Google Sheets').item.json.Nombre }}</p>\n<p>Apellidos: {{ $('Add data in Google Sheets').item.json.Apellidos }}</p>\n<p>Fecha de Nacimiento: {{ $('Add data in Google Sheets').item.json['Fecha de Nacimiento'] }}</p>\n<p>DNI: {{ $('Add data in Google Sheets').item.json.DNI }}</p>\n<p>Direccion: {{ $('Add data in Google Sheets').item.json.Direccion }}</p>\n<p>Ciudad: {{ $('Add data in Google Sheets').item.json.Ciudad }}</p>\n<p>CP: {{ $('Add data in Google Sheets').item.json.CP }}</p>\n<p>Email: {{ $('Add data in Google Sheets').item.json.Email }}</p>\n<p>Teléfono: {{ $('Add data in Google Sheets').item.json['Teléfono'] }}</p>\n\n<h2>Datos Laborales</h2>\n<p>Carnet de Conducir: {{ $('Add data in Google Sheets').item.json['Carnet de Conducir'] }}</p>\n<p>Nivel de Estudios: {{ $('Add data in Google Sheets').item.json['Nivel de Estudios'] }}</p>\n<p>Experiencia Laboral: {{ $('Add data in Google Sheets').item.json['Experiencia Laboral'] }}</p>\n\n<h2>Puesto Requerido</h2>\n<p>Puesto Preferido: {{ $('Add data in Google Sheets').item.json['Puesto Preferido'] }}</p>\n<p>Disponibilidad: {{ $('Add data in Google Sheets').item.json.Disponibilidad }}</p>\n<p>Perfil de LinkedIn: {{ $('Add data in Google Sheets').item.json.LinkedIn }}</p>",
+        "message": "=<h2>Nueva solicitud de empleo</h2>\n<hr>\n<h3>Datos Personales</h3>\n<p>Nombre: {{ $('Add data in Google Sheets').item.json.Nombre }}</p>\n<p>Apellidos: {{ $('Add data in Google Sheets').item.json.Apellidos }}</p>\n<p>Fecha de Nacimiento: {{ $('Add data in Google Sheets').item.json['Fecha de Nacimiento'] }}</p>\n<p>DNI: {{ $('Add data in Google Sheets').item.json.DNI }}</p>\n<p>Direccion: {{ $('Add data in Google Sheets').item.json.Direccion }}</p>\n<p>Ciudad: {{ $('Add data in Google Sheets').item.json.Ciudad }}</p>\n<p>CP: {{ $('Add data in Google Sheets').item.json.CP }}</p>\n<p>Email: {{ $('Add data in Google Sheets').item.json.Email }}</p>\n<p>Teléfono: {{ $('Add data in Google Sheets').item.json['Teléfono'] }}</p>\n<hr>\n<h3>Datos Laborales</h3>\n<p>Carnet de Conducir: {{ $('Add data in Google Sheets').item.json['Carnet de Conducir'] }}</p>\n<p>Nivel de Estudios: {{ $('Add data in Google Sheets').item.json['Nivel de Estudios'] }}</p>\n<p>Experiencia Laboral: {{ $('Add data in Google Sheets').item.json['Experiencia Laboral'] }}</p>\n<hr>\n<h3>Puesto Requerido</h3>\n<p>Puesto Preferido: {{ $('Add data in Google Sheets').item.json['Puesto Preferido'] }}</p>\n<p>Disponibilidad: {{ $('Add data in Google Sheets').item.json.Disponibilidad }}</p>\n<p>Perfil de LinkedIn: {{ $('Add data in Google Sheets').item.json.LinkedIn }}</p>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        512,
-        -16
+        336,
+        -192
       ],
       "id": "2237362e-9b65-4cbc-9d9a-ff35374ff059",
-      "name": "Email with All Data",
+      "name": "Email to Company",
       "webhookId": "002573d7-3ee9-4a6b-be4c-a3711dfe918d",
       "credentials": {
         "gmailOAuth2": {
@@ -318,21 +285,148 @@
           "name": "Gmail account"
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "respondWith": "allIncomingItems",
+        "sendTo": "={{ $('Add data in Google Sheets').item.json.Email }}",
+        "subject": "=Su solicitud de empleo",
+        "message": "=<h2>Solicitud de empleo procesada</h2>\n<hr>\n<h3>Datos Personales</h3>\n<p>Nombre: {{ $('Add data in Google Sheets').item.json.Nombre }}</p>\n<p>Apellidos: {{ $('Add data in Google Sheets').item.json.Apellidos }}</p>\n<p>Fecha de Nacimiento: {{ $('Add data in Google Sheets').item.json['Fecha de Nacimiento'] }}</p>\n<p>DNI: {{ $('Add data in Google Sheets').item.json.DNI }}</p>\n<p>Direccion: {{ $('Add data in Google Sheets').item.json.Direccion }}</p>\n<p>Ciudad: {{ $('Add data in Google Sheets').item.json.Ciudad }}</p>\n<p>CP: {{ $('Add data in Google Sheets').item.json.CP }}</p>\n<p>Email: {{ $('Add data in Google Sheets').item.json.Email }}</p>\n<p>Teléfono: {{ $('Add data in Google Sheets').item.json['Teléfono'] }}</p>\n<hr>\n<h3>Datos Laborales</h3>\n<p>Carnet de Conducir: {{ $('Add data in Google Sheets').item.json['Carnet de Conducir'] }}</p>\n<p>Nivel de Estudios: {{ $('Add data in Google Sheets').item.json['Nivel de Estudios'] }}</p>\n<p>Experiencia Laboral: {{ $('Add data in Google Sheets').item.json['Experiencia Laboral'] }}</p>\n<hr>\n<h3>Puesto Requerido</h3>\n<p>Puesto Preferido: {{ $('Add data in Google Sheets').item.json['Puesto Preferido'] }}</p>\n<p>Disponibilidad: {{ $('Add data in Google Sheets').item.json.Disponibilidad }}</p>\n<p>Perfil de LinkedIn: {{ $('Add data in Google Sheets').item.json.LinkedIn }}</p>",
         "options": {}
       },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
       "position": [
-        256,
-        240
+        560,
+        -192
       ],
-      "id": "9d244393-0e83-486f-bb07-0db4b9be7114",
-      "name": "Response to Form"
+      "id": "52d715a5-aa64-4164-8e45-30eac975261b",
+      "name": "Email to Applicant",
+      "webhookId": "002573d7-3ee9-4a6b-be4c-a3711dfe918d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "N5Qkpicxmd2OCx7a",
+          "name": "Gmail account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f189d124-9f8a-4550-b31b-5747274cb2b5",
+              "name": "error",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        112
+      ],
+      "id": "7dcac8d0-db16-4219-9d85-a53095a66327",
+      "name": "Error Field",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{ $node[\"Input Form\"].binary.cv0 }}",
+        "name": "=CV - {{ $('Input Form').item.json.body.nombre }} {{ $('Input Form').item.json.body.apellidos }}",
+        "driveId": {
+          "__rl": true,
+          "value": "1o2XbxpMnC1p4NAvs4BINnHAnVEPOWaX_",
+          "mode": "id"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1r67k03c_H2Y1JIFuIm3bBRJHeP95LPT4",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -304,
+        -176
+      ],
+      "id": "aaf6063d-b146-4044-9da5-abd0fb63892b",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "ipkOk1HogHLllDUd",
+          "name": "Google Drive account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.google.com/recaptcha/api/siteverify",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "6Lc7SdEsAAAAAKM7jAM-oUGXRtFIcJhh1nBGxt9i"
+            },
+            {
+              "name": "response",
+              "value": "={{ $json.body[\"g-recaptcha-response\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        128,
+        -448
+      ],
+      "id": "80819e9d-ece7-4cb6-9327-8f8035115889",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "de17d92a-e1a9-4d70-b8fa-61fa623dd7b8",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        320,
+        -448
+      ],
+      "id": "6dd7adc2-0b6e-4c6a-8364-25cc84ae061f",
+      "name": "If"
     }
   ],
   "pinData": {},
@@ -341,7 +435,7 @@
       "main": [
         [
           {
-            "node": "Add data in Google Sheets",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -359,7 +453,7 @@
         ],
         [
           {
-            "node": "Response to Form",
+            "node": "Error Field",
             "type": "main",
             "index": 0
           }
@@ -370,14 +464,26 @@
       "main": [
         [
           {
-            "node": "Email with All Data",
+            "node": "Email to Company",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Email with All Data": {
+    "Email to Company": {
+      "main": [
+        [
+          {
+            "node": "Email to Applicant",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Email to Applicant": {
       "main": [
         [
           {
@@ -385,10 +491,55 @@
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Error Field": {
+      "main": [
         [
           {
             "node": "Response to Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Add data in Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Field",
             "type": "main",
             "index": 0
           }
@@ -402,7 +553,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "8947922c-b7e3-4ca0-90c9-96f58b950628",
+  "versionId": "ea99b2d4-a51e-4a29-87d8-c7b0746bdee3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "603fe44794c79145f26873cf195b9fc1b3e25868fdf510a15bbed891bb622bde"
