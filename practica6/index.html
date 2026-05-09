@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Post RRSS</title>
+</head>
+<body>
+    <section class="main_container">
+        <form id="posts" name="posts" action="" method="post" enctype="multipart/form-data">
+            <div id="upload_zone">
+                <input id="file" type="file" name="image" accept="image/jpg, image/png" required>
+            </div>
+
+            <div id="description">
+                <textarea type="text" name="description" placeholder="Comentario pié de foto..."></textarea>
+            </div>
+            
+            <div id="rrss">
+                <input type="checkbox" name="ig" id="ig" value="ig">
+                <label for="ig">Instagram</label>
+                <input type="checkbox" name="fb" id="fb" value="fb">
+                <label for="fb">Facebook</label>
+            </div>
+            
+            <button class="btnSumbit" type="submit" name="postBtn">ENVIAR POST</button>
+            <h4 id="messages"></h4>
+        </form>
+    </section>
+    
+</body>
+</html>
