@@ -9,9 +9,19 @@
 </head>
 <body>
     <section class="main_container">
-        <form id="posts" name="posts" action="" method="post" enctype="multipart/form-data">
+        
+        <form id="posts" name="posts" action="http://localhost:5678/webhook-test/post" method="post" enctype="multipart/form-data">
+            <h1>NUEVO POST</h1>
             <div id="upload_zone">
-                <input id="file" type="file" name="image" accept="image/jpg, image/png" required>
+                <input id="file" type="file" name="image" accept="image/jpg, image/png" hidden>
+                
+                <div id="preview_container" hidden>
+                    <img src="" alt="image_preview" id="image_preview" alt="Imagen cargada">
+                </div>
+
+                <div id="image_container">
+                    <p id="upload_image">Haz click para elegir tu foto</p>
+                </div>
             </div>
 
             <div id="description">
@@ -19,15 +29,27 @@
             </div>
             
             <div id="rrss">
-                <input type="checkbox" name="ig" id="ig" value="ig">
-                <label for="ig">Instagram</label>
-                <input type="checkbox" name="fb" id="fb" value="fb">
-                <label for="fb">Facebook</label>
+                <div id="instagram">
+                    <label>
+                        <input type="checkbox" name="ig" id="ig" value="ig" hidden>
+                        <img class="logos" src="img/ig-logo.svg" alt="Logo Instagram">
+                    </label>
+                    <img class="check" src="img/check.svg" alt="Ok" hidden>
+                </div>
+   
+                <div id="facebook">
+                    <label>
+                        <input type="checkbox" name="fb" id="fb" value="fb" hidden>
+                        <img class="logos" src="img/fb-logo.svg" alt="Logo Facebook">
+                    </label>
+                    <img class="check" src="img/check.svg" alt="Ok" hidden>
+                </div>
             </div>
             
             <button class="btnSumbit" type="submit" name="postBtn">ENVIAR POST</button>
             <h4 id="messages"></h4>
         </form>
+        <button id="btnOpenClose" class="btnOpenClose" type="button">></button>
     </section>
     
 </body>

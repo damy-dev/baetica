@@ -18,6 +18,10 @@
   /* Bordes y Sombras */
   --border-color: #E0D7C6;
   --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.1);
+
+  /* Margin */
+  --margin-body-out: 0px 0px 0px 0px;
+  --margin-body-in: 0px 0px 0px -43%;
 }
 
 * {
@@ -25,10 +29,14 @@
 }
 
 body {
-    width: 60%;
-    margin: auto;
+    width: 45%;
+    margin: var(--margin-body-in);
+    transition: margin-left 1s ease;
+    /* height: 100vh; */
     overflow: auto;
     align-content: center;
+    background: url("img/Portada.png") no-repeat;
+    background-size: cover;
     background-color: var(--teracota-suave);
     background-blend-mode:hard-light;
     background-position: 0px -50px;
@@ -43,6 +51,7 @@ body {
     padding: 20px;
     margin: auto;
     height: 100vh;
+    /* border-radius: 0px 20px 20px 0px; */
     background: var(--bg-crema-albaicin);
     opacity: .95;
     box-shadow: 5px 5px 10px var(--teracota-suave);
@@ -66,6 +75,32 @@ form {
     cursor: pointer;
 }
 
+#preview_container, #image_container {
+    width: 97%;
+    height: 400px;
+    box-shadow: 0px 0px 100px 10px var(--teracota-suave) inset;
+    margin: auto;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    align-content: center;
+    cursor: pointer;
+}
+
+#upload_image, #image_preview {
+    width: 100%;
+    border-radius: 10px;
+    height: 400px;
+    object-fit: cover;
+}
+
+#upload_image {
+    margin: 0px;
+    padding: 0px;
+    font-size: xx-large;
+    display: block;
+    align-content: center;
+}
+
 h1 {
     color: var(--oliva-baetica);
 }
@@ -82,6 +117,37 @@ h2 {
     margin-bottom: 20px;
     margin-top: 30px;
     
+}
+
+#instagram {
+    width: 50%;
+    position: relative;
+    left: -30px;
+}
+
+#facebook {
+    width: 50%;
+    position: relative;
+    left: -30px;
+}
+
+.logos {
+    width: 60px;
+    transition: transform .7s;
+    position: absolute;
+    margin: auto;
+}
+
+.check {
+    margin-left: -20px;
+    margin-top: -20px;
+    width: 30px;
+    position: absolute;
+}
+
+.logos:hover {
+    transform: scale(1.2);
+    cursor: pointer;
 }
 
 input, label, textarea {
@@ -104,6 +170,13 @@ textarea {
     outline-color: var(--oliva-baetica); 
 }
 
+input::file-selector-button {
+    width: 100%;
+    height: 300px;
+    border: 2px dotted var(--gris-suave);
+    background: var(--border-color);
+}
+
 .btnSumbit {
     font-size: large;
     width: 100%;
@@ -117,6 +190,37 @@ textarea {
     cursor: pointer;
 }
 
+.btnOpenClose {
+    font-size: large;
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    margin: auto;
+    color: var(--bg-crema-albaicin);
+    background-color: var(--oliva-baetica);
+    border: 0px;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+}
+
 #messages {
     color: red;
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        width: 90%;
+        margin: auto;
+        background-repeat: repeat-y;
+    }
+
+    .main_container {
+        border-radius: 20px;
+    }
+    
+    .btnOpenClose {
+        display: none;
+    }
 }
