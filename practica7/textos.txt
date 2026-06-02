@@ -1,0 +1,99 @@
+INFORMACION PERSONAL
+
+Me presento. Mi nombre es Damián Massarelli y soy natural de Argentina, donde inicié esta andadura por los bits. 
+Desde el instituto me formé como Técnico Informático, tanto a nivel de hardware, armando y reparando PC's, como a nivel de software,
+programando y poniendo en marcha distintos sistemas. En aquella época, trabajaba con QBasic y FoxPro, junto con el manejo
+de bases de datos indexadas, al amparo del MS-DOS y Windows 95. Al terminar el instituto, comencé la carrera de Analista en Sistemas y 
+entré de lleno en el mundo Linux, mientras trabajaba en una empresa de desarrollo de sistemas para farmacias, haciendo
+puestas en marcha y dando la formación al cliente. Allá por el 2002, surgió la oportunidad de buscar un mejor futuro en Europa y,
+con 21 añitos recién cumplidos, no me lo pensé. Si bien seguí ligado al mundo de la informática, el destino
+laboral me llevo por otros caminos, dedicando parte de mi tiempo libre al desarrollo, mayormente en Visual Basic.
+Finalmente, hace unos años, decidí meterme de lleno en este apasionante mundo, y me gradué como Técnico Superior en 
+Desarrollo Multiplataforma, complementándolo con un master Full Stack.
+
+SKILLS
+
+Mis premisas son la responsabilidad y la dedicación, y por ello, me gusta sentir la satisfacción del trabajo bien hecho.
+Trabajar en un equipo colaborativo y coordinado es escencial para sacar cualquier proyecto adelante. Con lo cual, ser organizado y 
+saber establecer prioridades no es una elección, sino que se debe practicar diariamente. Tengo un enfoque estructurado y analítico,
+lo que me permite ser resolutivo y eficiente. Y, siempre, busco adaptarme y aprender, tanto de los demás como de mis propios errores.
+Si bien, me siento más cómodo trabajando de puertas para adentro, es decir, en el Backend y la lógica del servidor, 
+en los momentos en que el Frontend se ve como lo imaginaba y la comunicación fluye, tengo esa sensación de trabajo bien hecho que mencionaba.
+
+
+TECNOLOGÍAS
+
+A lo largo del tiempo, he aprendido varios lenguajes. Desde Visual Basic, entonces orientado a eventos, hasta Python en sus
+versiones más actuales. Esta es una referencia de lenguajes y Frameworks que he trabajado, algunos más habituales que otros:
+
+Lenguajes
+- VB
+- C#
+- Java
+- Python
+- Javascript
+- PHP
+- Kotlin
+- SQL
+- Html y CSS
+
+Frameworks
+- Spring
+- Django
+- NodeJS
+- Jetpack Compose
+- Entity Framework
+- Hibernate
+- JavaFX
+- Express
+
+IDE's
+- Visual Studio
+- IntelliJ
+- VSCode
+- Eclipse
+- Android Studio
+- Scene Builder (JavaFX)
+
+Además, tengo experiencia trabajando en la nube, sobre todo AWS.
+
+PROYECTOS REALIZADOS
+
+PIAmarsa
+Sistema de gestión de RRHH. Asignación de horarios, calendarios laborales con festivos, aplicación de convenios, gestión de fichajes, etc.
+Fue desarrollado mediante Spring (Boot y Security), tanto Backend como Frontend. Además cuenta con una App Móvil para fichar desde ella y ver
+información del usuario, horarios, fichajes, vacaciones, etc.
+https://youtu.be/tuv0AWutxHM
+https://github.com/AmarsaPI/PIAmarsa
+
+Consumo de API FIP
+App Web que extrae datos de la API de la Federación Internacional de Padel. Tiene opciones de filtrado por nombre, nacionalidad o número de ranking.
+Desarrollada con HTML, Tailwind y Javascript, interpretando y trabajando el JSON de respuesta del servidor.
+https://youtu.be/yq5nKX5NS18
+https://damy-dev.github.io/baetica/practica4
+https://github.com/damy-dev/baetica/tree/main/practica4
+
+Landing Page para VirtualSynth
+Empresa dedicada el diseño y fabricación de sintetizadores de audio, solicita un Web enfocada a la captación de talentos para Ingenieros de Audio, 
+Firmaware, UI y Montaje. Los datos obtenidos se guardan en Google Sheets, se guardan los CV en Drive y se envían notificaciones a través de email y Telegram.
+Desarrollada con HTML. Tailwind y Javascript, comunicándose con el Backend, que se gestiona mediante flujos de trabajo en n8n.
+https://youtu.be/zV7n85sZJIM
+https://damy-dev.github.io/baetica/practica5/
+https://github.com/damy-dev/baetica/tree/main/practica5
+
+Landing Page para publicaciones
+Landing en la que se cargan fotografías con un texto al pié y se puede elegir si realizar la publicación en Facebook, Instagram o ambas. Una vez hecha
+la publicación, se notifica por Telegram.
+Como las anteriores, desarrollada con HTML, CSS y Javascript, y Backend gestionado a través de n8n.
+https://youtu.be/Uh4DSFrep1o
+https://damy-dev.github.io/baetica/practica6/
+https://github.com/damy-dev/baetica/tree/main/practica6
+
+T-Calc
+App de escritorio que consiste en una calculadora que guarda el historial y además se puede transparentar con la rueda del ratón, y así poder ver
+los datos que están por debajo, si los necesitas.
+Desarrollada en python y librerías de tkinter para Desktop Apps.
+https://github.com/damy-dev/small-projects/tree/main/T-Calc
+
+
+ENLACES DE CONTACTO
